@@ -1,0 +1,3 @@
+#Track render distance
+#Range: 64 ~ 1024
+trackRenderDist = 256

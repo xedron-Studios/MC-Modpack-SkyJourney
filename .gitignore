@@ -4,6 +4,7 @@
 config/chunky/tasks
 config/iris.properties
 config/resourceful-config-web.json
+config/roughlyenoughitems
 config/stack-to-nearby-chests/locked-slots
 backup
 build

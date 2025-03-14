@@ -24,13 +24,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Download, Execute Script & Show Tree
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo "Fetching latest release information from Griefed/ServerPackCreator..."
+          release_data=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/Griefed/ServerPackCreator/releases/latest)
+          asset_url=$(echo "$release_data" | jq -r '.assets[] | select(.name | endswith(".sh")) | .browser_download_url')
+          if [ -z "$asset_url" ]; then
+            echo "No asset ending with .sh found"
+            exit 1
+          fi
+          echo "Downloading script: $asset_url"
+          curl -L -o script.sh "$asset_url"
+          echo "Executing script with Bash..."
+          bash script.sh
+          echo "Displaying tree structure:"
+          tree .

@@ -24,18 +24,24 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-      - name: Download, Execute Script & Show Tree
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '17'
+      - name: Run Java Version
+        run: java -version
+      - name: Download, Execute Jar & Show Tree
         run: |
           echo "Fetching latest release information from Griefed/ServerPackCreator..."
           release_data=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/Griefed/ServerPackCreator/releases/latest)
-          asset_url=$(echo "$release_data" | jq -r '.assets[] | select(.name | endswith(".sh")) | .browser_download_url')
+          asset_url=$(echo "$release_data" | jq -r '.assets[] | select(.name | endswith(".jar")) | .browser_download_url')
           if [ -z "$asset_url" ]; then
-            echo "No asset ending with .sh found"
+            echo "No asset ending with .jar found"
             exit 1
           fi
-          echo "Downloading script: $asset_url"
-          curl -L -o script.sh "$asset_url"
-          echo "Executing script with Bash..."
-          bash script.sh
+          echo "Downloading jar: $asset_url"
+          curl -L -o ServerPackCreator.jar "$asset_url"
+          echo "Executing jar with Java..."
+          java -jar ServerPackCreator.jar
           echo "Displaying tree structure:"
           tree .

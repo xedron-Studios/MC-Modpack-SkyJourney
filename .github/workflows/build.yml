@@ -34,7 +34,7 @@ jobs:
         run: |
           echo "Fetching latest release information from Griefed/ServerPackCreator..."
           release_data=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/Griefed/ServerPackCreator/releases/latest)
-          asset_url=$(echo "$release_data" | jq -r '.assets | map(select(.name | endswith(".jar") and (.name | contains("javadoc")|not) and (.name | contains("sources")|not) and (.name | contains("api")|not) and (.name | contains("plugin")|not))) | .[0].browser_download_url')
+          asset_url=$(echo "$release_data" | jq -r '.assets | map(select(.name | endswith(".jar") and (contains("javadoc")|not) and (contains("sources")|not) and (contains("api")|not) and (contains("plugin")|not))) | .[0].browser_download_url')
           if [ -z "$asset_url" ]; then
             echo "No asset ending with .jar found satisfying the filter"
             exit 1

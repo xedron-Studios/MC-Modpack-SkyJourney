@@ -28,6 +28,7 @@ jobs:
         with:
           distribution: 'zulu' # See 'Supported distributions' for available options
           java-version: '17'
+          check-latest: true
       - name: Run Java Version
         run: java -version
       - name: Download, Execute Jar & Show Tree

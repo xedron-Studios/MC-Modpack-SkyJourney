@@ -40,6 +40,7 @@ jobs:
           fi
           echo "Downloading jar: $asset_url"
           curl -L -o ServerPackCreator.jar "$asset_url"
+          tree .
       - name: Run ServerPackCreator
         run: |
           echo "Executing jar with Java..."

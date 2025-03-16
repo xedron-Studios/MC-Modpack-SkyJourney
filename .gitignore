@@ -2,7 +2,8 @@
 .mixin.out
 .replay_cache
 backup
-build
+build/temp
+build/temp_server_pack.zip
 config/chunky/tasks
 config/fabric/indigo-renderer.properties
 config/indium-renderer.properties

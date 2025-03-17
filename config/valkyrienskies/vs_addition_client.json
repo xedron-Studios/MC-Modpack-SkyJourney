@@ -1,0 +1,14 @@
+{
+  "enablePointRemoval" : true,
+  "embeddium" : {
+    "enableBlockEntityCullOnShips" : false
+  },
+  "experimental" : {
+    "removeFogInFakeAirPocket" : false,
+    "cullWaterSurfaceInFakeAirPocket" : true,
+    "seaLevel" : 62.0,
+    "highLightFakedAirPocket" : false,
+    "removeBubbleLikeParticlesInFakeAirPocket" : false
+  },
+  "$schema" : "schemas/vs_addition_client.schema.json"
+}

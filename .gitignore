@@ -17,17 +17,19 @@ config/roughlyenoughitems/*
 config/roughlyenoughitems/favorites.json5
 config/roughlyenoughitems/pinyin_double.properties
 config/roughlyenoughitems/pinyin.properties
+config/sodium-extra-options.json
 config/sound_physics_remastered/*
 config/sound_physics_remastered/occlusion.properties
 config/sound_physics_remastered/reflectivity.properties
 config/stack-to-nearby-chests/locked-slots
-config/xaerominimap_entities.json
 crash-reports
 data
 Distant_Horizons_server_data
 ESM
 fancymenu_data
+journeymap/journeymap.log
 logs
+modernfix/structureCacheV1
 options.txt
 replay_recordings
 resourcepacks
@@ -38,5 +40,3 @@ servers.dat_old
 shaderpacks
 usercache.json
 usernamecache.json
-xaero
-XaeroWaypoints_BACKUP*

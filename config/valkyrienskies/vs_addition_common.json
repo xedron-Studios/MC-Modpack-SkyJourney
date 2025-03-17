@@ -1,0 +1,13 @@
+{
+  "maxTiltAngle" : 45.0,
+  "create" : {
+    "insteadCreateInteractiveDeployer" : true
+  },
+  "clockwork" : {
+    "disableGrabbedShipCollision" : true
+  },
+  "experimental" : {
+    "fakeAirPocket" : false
+  },
+  "$schema" : "schemas/vs_addition_common.schema.json"
+}

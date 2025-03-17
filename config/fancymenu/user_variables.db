@@ -1,2 +1,26 @@
 type = user_variables
 
+variable {
+  name = modpack_version_type
+  value = PRERELEASE
+  reset_on_launch = false
+}
+
+variable {
+  name = modpack_name_display
+  value = SkyJourney
+  reset_on_launch = false
+}
+
+variable {
+  name = modpack_name_raw
+  value = skyjourney
+  reset_on_launch = false
+}
+
+variable {
+  name = modpack_version
+  value = 1.0.0
+  reset_on_launch = false
+}
+

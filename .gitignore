@@ -40,3 +40,6 @@ servers.dat_old
 shaderpacks
 usercache.json
 usernamecache.json
+config/voicechat/voicechat-client.properties
+config/voicechat/voicechat-volumes.properties
+config/voicechat/username-cache.json

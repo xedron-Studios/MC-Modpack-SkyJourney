@@ -32,9 +32,9 @@ jobs:
           distribution: 'zulu' # See 'Supported distributions' for available options
           java-version: '21'
           check-latest: true
-      - name: Run Java Version
+      - name: "Server: Run Java Version"
         run: java -version
-      - name: Download ServerPackCreator
+      - name: "Server: Download ServerPackCreator"
         run: |
           echo "Fetching latest release information from Griefed/ServerPackCreator..."
           release_data=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/Griefed/ServerPackCreator/releases/latest)
@@ -47,12 +47,15 @@ jobs:
           curl -L -o ServerPackCreator.jar "$asset_url"
           pwd
           tree .
-      - name: Run ServerPackCreator
+      - name: "Server: Run ServerPackCreator"
         run: |
           echo "Executing jar with Java..."
           java -jar ServerPackCreator.jar -cli -config "build/ServerPackCreator.conf" --destination "build/temp"
           echo "Displaying tree structure:"
           tree build/temp
+      - name: "Client: "
+        shell: pwsh
+        run: ./build/client-build.ps1 -ModrinthApiKey ${{ secrets.MODRINTH_API_KEY }}
       # https://github.com/marketplace/actions/gh-release
       - name: Create Release
         uses: softprops/action-gh-release@v2

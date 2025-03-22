@@ -2,6 +2,7 @@
 .mixin.out
 .replay_cache
 backup
+build/client
 build/temp
 build/temp_server_pack.zip
 config/chunky/tasks
@@ -43,3 +44,6 @@ usernamecache.json
 config/voicechat/voicechat-client.properties
 config/voicechat/voicechat-volumes.properties
 config/voicechat/username-cache.json
+config/inventoryprofilesnext
+journeymap/colorpalette.json
+config/bclib/cache.json

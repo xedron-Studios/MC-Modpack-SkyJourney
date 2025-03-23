@@ -156,7 +156,7 @@
       "fade": 5
     },
     "jump": {
-      "enabled": true,
+      "enabled": false,
       "speed": 1.0,
       "fade": 5
     },

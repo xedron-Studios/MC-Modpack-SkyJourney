@@ -53,14 +53,16 @@ jobs:
           java -jar ServerPackCreator.jar -cli -config "build/ServerPackCreator.conf" --destination "build/temp"
           echo "Displaying tree structure:"
           tree build/temp
-      #- name: "Client: "
-      #  shell: pwsh
-      #  run: ./build/client-build.ps1 -ModrinthApiKey ${{ secrets.MODRINTH_API_KEY }}
+      - name: "Client: Run client-build.ps1"
+        shell: pwsh
+        run: ./build/client-build.ps1 -ModrinthApiKey "${{ secrets.MODRINTH_API_KEY }}"
       # https://github.com/marketplace/actions/gh-release
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           draft: true
-          files: build/temp_server_pack.zip
+          files: |
+            build/temp_client_pack.zip
+            build/temp_server_pack.zip
           generate_release_notes: true
           prerelease: true

@@ -165,11 +165,19 @@ foreach($override in $build_config.overrides) {
 }
 Write-Host "Copied overrides"
 
-Write-Host "Creating modpack.zip..."
+Write-Host "Creating temp_client_pack.zip..."
 try {
     Compress-Archive -Path "build/client/*" -DestinationPath "build/temp_client_pack.zip" -Force -CompressionLevel Optimal
 } catch {
-    Write-Error "Failed to create modpack.zip"
+    Write-Error "Failed to create temp_client_pack.zip"
     exit 1
 }
 Write-Host "Created temp_client_pack.zip"
+try {
+    Write-Host "Moving temp_client_pack.zip to temp_client_pack.mrpack..."
+    Move-Item -Path "build/temp_client_pack.zip" -Destination "build/temp_client_pack.mrpack" -Force
+    Write-Host "Moved temp_client_pack.zip to temp_client_pack.mrpack"
+} catch {
+    Write-Error "Failed to move temp_client_pack.zip to temp_client_pack.mrpack"
+    exit 1
+}

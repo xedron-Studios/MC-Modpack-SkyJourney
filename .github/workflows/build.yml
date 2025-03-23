@@ -62,7 +62,7 @@ jobs:
         with:
           draft: true
           files: |
-            build/temp_client_pack.zip
+            build/temp_client_pack.mrpack
             build/temp_server_pack.zip
           generate_release_notes: true
           prerelease: true

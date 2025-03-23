@@ -4,6 +4,7 @@
 backup
 build/client
 build/temp
+build/temp_client_pack.mrpack
 build/temp_client_pack.zip
 build/temp_server_pack.zip
 config/bclib/cache.json

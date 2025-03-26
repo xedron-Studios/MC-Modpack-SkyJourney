@@ -1,8 +1,8 @@
 {
   "defaultSigningMode": "PROMPT",
   "enableMod": true,
-  "showNCRButton": true,
-  "showReloadButton": true,
+  "showNCRButton": false,
+  "showReloadButton": false,
   "verifiedIconEnabled": true,
   "showServerSafety": true,
   "hideInsecureMessageIndicators": true,

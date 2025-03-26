@@ -12,7 +12,7 @@ param(
 )
 
 if(-not $ModrinthApiKey) {
-    Write-Error "Modrinth API Key is required"
+    Write-Host "Modrinth API Key is required"
     exit 1
 }
 
@@ -118,7 +118,7 @@ try {
     } | ConvertTo-Json -Depth 100) | ConvertFrom-Json -Depth 100
     Write-Host "Got version files from Modrinth API"
 } catch {
-    Write-Error "Failed to get version files from Modrinth API"
+    Write-Host "Failed to get version files from Modrinth API"
     exit 1
 }
 
@@ -150,17 +150,69 @@ $mr_index_json | ConvertTo-Json -Depth 100 | Set-Content -Path "build/client/mod
 Write-Host "--------------------------------------------------|"
 Write-Host "Generated modrinth.index.json"
 
+Write-Host "Generating FancyMenu user variables..."
+$mp_version_type = if ($build_config.versionId -match '-(alpha|beta|prerelease|release)') {
+    $matches[1].ToUpper()
+} else {
+    "RELEASE"
+}
+$mp_fancy_menu_config = @"
+type = user_variables
+
+variable {
+  name = modpack_version_type
+  value = $($mp_version_type)
+  reset_on_launch = false
+}
+
+variable {
+  name = modpack_name_display
+  value = $($build_config.name)
+  reset_on_launch = false
+}
+
+variable {
+  name = modpack_name_raw
+  value = $($build_config.name.ToLower())
+  reset_on_launch = false
+}
+
+variable {
+  name = modpack_version
+  value = $($build_config.versionId)
+  reset_on_launch = false
+}
+"@
+
+try {
+    Set-Content -Path "config/fancymenu/user_variables.db" -Value $mp_fancy_menu_config -Encoding utf8
+    Write-Host "Generated FancyMenu user variables:"
+    $mp_fancy_menu_config -split "`n" | Where-Object { $_ -match "name =|value =" }
+} catch {
+    Write-Host "Failed to generate FancyMenu user variables"
+    exit 1
+}
+
 Write-Host "Creating overrides directory..."
 try {
     New-Item -ItemType Directory -Path "build/client/overrides" | Out-Null
 } catch {
-    Write-Error "Failed to create overrides directory"
+    Write-Host "Failed to create overrides directory"
+    exit 1
+}
+
+Write-Host "Copying default options.txt to overrides..."
+try {
+    Copy-Item -Path "options.txt.default" -Destination "build/client/overrides/options.txt" -Force
+    Write-Host "Copied default options.txt to overrides"
+} catch {
+    Write-Host "Failed to copy default options.txt to overrides"
     exit 1
 }
 
 Write-Host "Copying overrides dynamically..."
 foreach($override in $build_config.overrides) {
-    Write-Host ("Copying override "+$override)
+    Write-Host ("- "+$override)
     Copy-Item -Path $override -Destination "build/client/overrides" -Recurse -Force
 }
 Write-Host "Copied overrides"
@@ -169,7 +221,7 @@ Write-Host "Creating temp_client_pack.zip..."
 try {
     Compress-Archive -Path "build/client/*" -DestinationPath "build/temp_client_pack.zip" -Force -CompressionLevel Optimal
 } catch {
-    Write-Error "Failed to create temp_client_pack.zip"
+    Write-Host "Failed to create temp_client_pack.zip"
     exit 1
 }
 Write-Host "Created temp_client_pack.zip"
@@ -178,6 +230,9 @@ try {
     Move-Item -Path "build/temp_client_pack.zip" -Destination "build/temp_client_pack.mrpack" -Force
     Write-Host "Moved temp_client_pack.zip to temp_client_pack.mrpack"
 } catch {
-    Write-Error "Failed to move temp_client_pack.zip to temp_client_pack.mrpack"
+    Write-Host "Failed to move temp_client_pack.zip to temp_client_pack.mrpack"
     exit 1
 }
+
+Write-Host "--------------------------------------------------|"
+Write-Host "Done, the client pack was built successfully."

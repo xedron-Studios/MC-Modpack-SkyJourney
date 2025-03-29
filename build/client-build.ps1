@@ -7,11 +7,22 @@
 
 # Add parameter for Modrinth API Key
 param(
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory=$false)]
     [string]$ModrinthApiKey
 )
 
-if(-not $ModrinthApiKey) {
+if (-not $ModrinthApiKey) {
+    if (Test-Path ".env") {
+        $envContent = Get-Content ".env" -Encoding utf8
+        $envContent | ForEach-Object {
+            if ($_ -match "^ModrinthApiKey\s*=\s*(.+)$") {
+                $ModrinthApiKey = $matches[1]
+            }
+        }
+    }
+}
+
+if (-not $ModrinthApiKey) {
     Write-Host "Modrinth API Key is required"
     exit 1
 }
@@ -60,6 +71,12 @@ Write-Host "Created build directory"
 if(Test-Path -Path "build/temp_client_pack.zip") {
     Remove-Item -Path "build/temp_client_pack.zip" -Force | Out-Null
     Write-Host "Deleted existing temp_client_pack.zip"
+}
+
+# Delete existing build/temp_client_pack.mrpack if it exists
+if(Test-Path -Path "build/temp_client_pack.mrpack") {
+    Remove-Item -Path "build/temp_client_pack.mrpack" -Force | Out-Null
+    Write-Host "Deleted existing temp_client_pack.mrpack"
 }
 
 # Generate modrinth.index.json
@@ -182,6 +199,7 @@ variable {
   value = $($build_config.versionId)
   reset_on_launch = false
 }
+
 "@
 
 try {
@@ -192,6 +210,16 @@ try {
     Write-Host "Failed to generate FancyMenu user variables"
     exit 1
 }
+
+Write-Host "Enabling FancyMenu modpack mode..."
+$mp_fancy_menu_options = Get-Content -Path "config/fancymenu/options.txt" -Encoding utf8
+$mp_fancy_menu_options | ForEach-Object {
+    if ($_ -match "B:modpack_mode = 'false';") {
+        $_ -replace "B:modpack_mode = 'false';", "B:modpack_mode = 'true';"
+        Write-Host "- B:modpack_mode → 'true'"
+    }
+} | Set-Content -Path "config/fancymenu/options.txt" -Encoding utf8
+Write-Host "Enabled FancyMenu modpack mode"
 
 Write-Host "Creating overrides directory..."
 try {

@@ -1,3 +1,4 @@
+.env
 .fabric
 .mixin.out
 .replay_cache

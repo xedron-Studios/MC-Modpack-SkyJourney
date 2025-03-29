@@ -20,6 +20,7 @@ variable {
 
 variable {
   name = modpack_version
-  value = 0.0.2-prerelease
+  value = 0.0.3-prerelease
   reset_on_launch = false
 }
+

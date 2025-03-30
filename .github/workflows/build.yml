@@ -47,6 +47,10 @@ jobs:
           curl -L -o ServerPackCreator.jar "$asset_url"
           pwd
           tree .
+      - name: "Server: Setup ServerPackCreator"
+        run: |
+          echo "Setting up ServerPackCreator..."
+          java -jar ServerPackCreator.jar --setup ""
       - name: "Server: Run ServerPackCreator"
         run: |
           echo "Executing jar with Java..."

@@ -53,7 +53,7 @@ jobs:
           java -jar ServerPackCreator.jar --setup ""
           echo "Adding *.disabled to zip exclude list..."
           grep "de.griefed.serverpackcreator.serverpack.zip.exclude=" /home/runner/ServerPackCreator/serverpackcreator.properties
-          sed -i 's/de.griefed.serverpackcreator.serverpack.zip.exclude=.*/de.griefed.serverpackcreator.serverpack.zip.exclude=*.disabled,/' /home/runner/ServerPackCreator/serverpackcreator.properties
+          sed -i 's/de.griefed.serverpackcreator.serverpack.zip.exclude=/de.griefed.serverpackcreator.serverpack.zip.exclude=*.disabled,/' /home/runner/ServerPackCreator/serverpackcreator.properties
           grep "de.griefed.serverpackcreator.serverpack.zip.exclude=" /home/runner/ServerPackCreator/serverpackcreator.properties
       - name: "Server: Run ServerPackCreator"
         run: |

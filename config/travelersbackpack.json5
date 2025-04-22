@@ -83,6 +83,9 @@
 	"backpackUpgrades": {
 		"enableTanksUpgrade": true,
 		"enableCraftingUpgrade": true,
+		"enableFurnaceUpgrade": true,
+		"enableSmokerUpgrade": true,
+		"enableBlastFurnaceUpgrade": true,
 		"enableJukeboxUpgrade": true,
 		"pickupUpgradeSettings": {
 			"enableUpgrade": true,
@@ -91,11 +94,13 @@
 		"magnetUpgradeSettings": {
 			"enableUpgrade": true,
 			"filterSlotCount": 9,
-			"pullRange": 5
+			"pullRange": 5,
+			"tickRate": 10
 		},
 		"feedingUpgradeSettings": {
 			"enableUpgrade": true,
-			"filterSlotCount": 9
+			"filterSlotCount": 9,
+			"tickRate": 100
 		},
 		"voidUpgradeSettings": {
 			"enableUpgrade": true,

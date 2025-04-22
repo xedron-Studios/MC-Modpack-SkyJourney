@@ -155,7 +155,7 @@ $mp_dependencies | Add-Member -MemberType NoteProperty -Name "minecraft" -Value 
 
 $mr_index_json = [PSCustomObject]::new()
 $mr_index_json | Add-Member -MemberType NoteProperty -Name "game" -Value "minecraft"
-$mr_index_json | Add-Member -MemberType NoteProperty -Name "formatVersion" -Value "1"
+$mr_index_json | Add-Member -MemberType NoteProperty -Name "formatVersion" -Value 1
 $mr_index_json | Add-Member -MemberType NoteProperty -Name "versionId" -Value $build_config.versionId
 $mr_index_json | Add-Member -MemberType NoteProperty -Name "name" -Value $build_config.name
 $mr_index_json | Add-Member -MemberType NoteProperty -Name "summary" -Value $build_config.summary

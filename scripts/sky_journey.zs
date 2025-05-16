@@ -23,6 +23,7 @@ for material in materials {
         val recipeName = "minecraft:" + material + "_" + tool;
         if (craftingTable.getRecipeByName(recipeName) != null) {
             craftingTable.removeByName(recipeName);
+            print(recipeName+" removed!");
         }
     }
 }

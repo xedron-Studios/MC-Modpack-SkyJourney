@@ -142,7 +142,8 @@
       "origins:like_water": true,
       "origins:aquatic": true,
       "origins:conduit_power_on_land": true,
-      "origins:air_from_potions": true
+      "origins:air_from_potions": true,
+      "origins:swim_speed": true
     },
     "origins:arachnid": {
       "enabled": true,

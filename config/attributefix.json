@@ -495,17 +495,6 @@
         "value": 1024
       }
     },
-    "estrogen:boob_initial_size": {
-      "enabled": false,
-      "min": {
-        "default": 0,
-        "value": 0
-      },
-      "max": {
-        "default": 1,
-        "value": 1
-      }
-    },
     "zenith_attributes:armor_pierce": {
       "enabled": false,
       "min": {
@@ -515,6 +504,17 @@
       "max": {
         "default": 1000,
         "value": 1000
+      }
+    },
+    "estrogen:boob_initial_size": {
+      "enabled": false,
+      "min": {
+        "default": 0,
+        "value": 0
+      },
+      "max": {
+        "default": 1,
+        "value": 1
       }
     },
     "additionalentityattributes:generic.mob_detection_range": {
@@ -561,7 +561,7 @@
         "value": 1000000
       }
     },
-    "estrogen:dash_level": {
+    "zenith_attributes:mining_speed": {
       "enabled": false,
       "min": {
         "default": 0,
@@ -572,7 +572,7 @@
         "value": 10
       }
     },
-    "zenith_attributes:mining_speed": {
+    "estrogen:dash_level": {
       "enabled": false,
       "min": {
         "default": 0,

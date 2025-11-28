@@ -48,6 +48,19 @@ _version = 3
 	#
 	# If true, clients will receive real-time LOD updates for chunks outside the client's render distance.
 	enableRealTimeUpdates = true
+	#
+	# Maximum per-player speed for uploading LODs to the clients, in KB/s.
+	# Value of 0 disables the limit.
+	playerBandwidthLimit = 500
+	#
+	# Maximum global speed for uploading LODs to the clients, in KB/s.
+	# Value of 0 disables the limit.
+	globalBandwidthLimit = 0
+	#
+	# Enables adaptive transfer speed based on client performance.
+	# If true, DH will automatically adjust transfer rate to minimize connection lag.
+	# If false, transfer speed will remain fixed.
+	enableAdaptiveTransferSpeed = false
 
 	[server.experimental]
 		#
@@ -106,20 +119,26 @@ _version = 3
 		# UNCOMPRESSED 
 		# Should only be used for testing, is worse in every way vs [LZ4].
 		# Expected Compression Ratio: 1.0
-		# Estimated average DTO read speed: 1.64 milliseconds
-		# Estimated average DTO write speed: 12.44 milliseconds
+		# Estimated average DTO read speed: 6.09 milliseconds
+		# Estimated average DTO write speed: 6.01 milliseconds
 		# 
 		# LZ4 
 		# A good option if you're CPU limited and have plenty of hard drive space.
-		# Expected Compression Ratio: 0.36
-		# Estimated average DTO read speed: 1.85 ms
-		# Estimated average DTO write speed: 9.46 ms
+		# Expected Compression Ratio: 0.4513
+		# Estimated average DTO read speed: 3.25 ms
+		# Estimated average DTO write speed: 5.99 ms
+		# 
+		# Z_STD 
+		# A good option if you're CPU limited and have plenty of hard drive space.
+		# Expected Compression Ratio: 0.2606
+		# Estimated average DTO read speed: 9.31 ms
+		# Estimated average DTO write speed: 15.13 ms
 		# 
 		# LZMA2 
 		# Slow but very good compression.
-		# Expected Compression Ratio: 0.14
-		# Estimated average DTO read speed: 11.89 ms
-		# Estimated average DTO write speed: 192.01 ms
+		# Expected Compression Ratio: 0.2
+		# Estimated average DTO read speed: 13.29 ms
+		# Estimated average DTO write speed: 70.95 ms
 		dataCompression = "LZMA2"
 		#
 		# Enabling this will drastically increase chunk processing time
@@ -266,6 +285,11 @@ _version = 3
 		# Depending on the generator mode, this will import existing chunks 
 		# and/or generating missing chunks.
 		enableDistantGeneration = true
+		#
+		# When logging generation progress also include the rate at which chunks 
+		# are being generated. 
+		# This can be useful for troubleshooting performance.
+		generationProgressIncludeChunksPerSecond = true
 
 [client]
 	#
@@ -369,7 +393,7 @@ _version = 3
 				# Shows the memory use and array counts for each DH object pool.
 				showSeparatedObjectPools = false
 				#
-				# Shows info about each thread pool.
+				# Shows the player's LOD position.
 				showPlayerPos = true
 				#
 				# Shows the combined memory use and array counts for all DH pooled objects.
@@ -661,6 +685,14 @@ _version = 3
 				# SINGLE_PASS: Fades after MC's transparent pass, opaque blocks underwater won't be faded. 
 				# DOUBLE_PASS: Slowest, fades after both MC's opaque and transparent passes, provides the smoothest transition.
 				vanillaFadeMode = "DOUBLE_PASS"
+				#
+				# This is the same as vanilla Biome Blending settings for Lod area. 
+				#     Note that anything other than '0' will greatly effect Lod building time. 
+				# 
+				#     '0' equals to Vanilla Biome Blending of '1x1' or 'OFF', 
+				#     '1' equals to Vanilla Biome Blending of '3x3', 
+				#     '2' equals to Vanilla Biome Blending of '5x5'...
+				lodBiomeBlending = 3
 
 			[client.advanced.graphics.fog]
 				#

@@ -58,6 +58,8 @@
 		"allowOnlyEquippedBackpack": false,
 		// Allows opening the backpack by pressing a keybind while hovering over the slot with backpack in the player's inventory
 		"allowOpeningFromSlot": false,
+		// Prevents more than one player from accessing the backpack at the same time when it's placed on the ground
+		"preventMultiplePlayersAccess": false,
 		// Backpack immune to any damage source (lava, fire), can't be destroyed, never disappears as floating item
 		"invulnerableBackpack": true,
 		// List of items that can be put in tool slots (Use registry names, for example: minecraft:apple, minecraft:flint)
@@ -89,22 +91,32 @@
 		"enableJukeboxUpgrade": true,
 		"pickupUpgradeSettings": {
 			"enableUpgrade": true,
-			"filterSlotCount": 9
+			"filterSlotCount": 9,
+			"slotsInRow": 3
 		},
 		"magnetUpgradeSettings": {
 			"enableUpgrade": true,
 			"filterSlotCount": 9,
+			"slotsInRow": 3,
 			"pullRange": 5,
 			"tickRate": 10
 		},
 		"feedingUpgradeSettings": {
 			"enableUpgrade": true,
 			"filterSlotCount": 9,
+			"slotsInRow": 3,
 			"tickRate": 100
+		},
+		"refillUpgradeSettings": {
+			"enableUpgrade": true,
+			"filterSlotCount": 9,
+			"slotsInRow": 3,
+			"tickRate": 5
 		},
 		"voidUpgradeSettings": {
 			"enableUpgrade": true,
-			"filterSlotCount": 9
+			"filterSlotCount": 9,
+			"slotsInRow": 3
 		}
 	},
 	"world": {

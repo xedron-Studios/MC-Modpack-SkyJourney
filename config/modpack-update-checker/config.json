@@ -1,8 +1,8 @@
 {
   "schemaVersion": 9,
   "currentVersion": "1.0.0",
-  "modpackName": "Modpack Name Goes Here",
-  "modpackAuthor": "My Modpack Studio",
+  "modpackName": "SkyJourney",
+  "modpackAuthor": "xedron Studios",
   "modpackReleaseType": "stable",
   "updateCheckerId": "https://raw.githubusercontent.com/Modpack-Update-Checker/example-update-checker/main/",
   "advanced": {
